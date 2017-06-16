@@ -22,7 +22,11 @@ class UsersController extends Controller
         ]);
         if ($user) {
             return response()->json([
-                'success' => true,
+                'info' => '成功',
+            ]);
+        }else{
+            return response()->json([
+                'info' => '失败',
             ]);
         }
     }
