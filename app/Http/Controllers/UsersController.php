@@ -17,6 +17,8 @@ class UsersController extends Controller
             'name'=>$_POST['name'],
             'email'=>$_POST['email'],
             'password'=>$_POST['password'],
+            'followers'=>0,
+            'following'=>0,
         ]);
         if ($user) {
             return response()->json([
