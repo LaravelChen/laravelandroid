@@ -10,7 +10,7 @@
     <body>
     <div class="container" style="margin-top: 100px">
         <form method="POST" action="{{url('/api/insert_userinfo')}}" accept-charset="UTF-8">
-            {!! csrf_field() !!}
+            {{--{!! csrf_field() !!}--}}
             <div class="form-group">
                 <label for="name" class="control-label">User:</label>
                 <input id="name" name="name" type="text" class="form-control" required="required">
