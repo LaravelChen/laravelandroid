@@ -52,29 +52,29 @@ class UsersController extends Controller
                 'type' => 'name',
                 'info' => '用户名已存在'
             ]);
-            $validator2 = Validator::make($request->all(), [
-                'email' => 'required|unique:users',
+        }
+        $validator2 = Validator::make($request->all(), [
+            'email' => 'required|unique:users',
+        ]);
+        if ($validator2->fails()) {
+            return response()->json([
+                'message' => false,
+                'type' => 'email',
+                'info' => '邮箱已存在'
             ]);
-            if ($validator2->fails()) {
-                return response()->json([
-                    'message' => false,
-                    'type' => 'email',
-                    'info' => '邮箱已存在'
-                ]);
-            }
-            $user = User::create($request->all());
-            if ($user) {
-                return response()->json([
-                    'user' => [
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'followers' => $user->followers,
-                        'following' => $user->following,
-                        'created_at' => $user->created_at->toDateString(),
-                    ],
-                    'message' => true,
-                ]);
-            }
+        }
+        $user = User::create($request->all());
+        if ($user) {
+            return response()->json([
+                'user' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'followers' => $user->followers,
+                    'following' => $user->following,
+                    'created_at' => $user->created_at->toDateString(),
+                ],
+                'message' => true,
+            ]);
         }
     }
 

@@ -15,6 +15,5 @@ use Illuminate\Http\Request;
 
 Route::post('/user_register', 'UsersController@register');
 Route::post('/user_login', 'UsersController@login');
-
 Route::get('/logout', 'UsersController@logout');
 Route::get('/is_auth', 'UsersController@is_auth');
