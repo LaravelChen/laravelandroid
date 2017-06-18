@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use Validator;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -15,7 +15,10 @@ class UsersController extends Controller
      */
     public function login(Request $request)
     {
-        $is_login = Auth::attempt($request->all());
+        $is_login = Auth::attempt([
+            'email' => $request->get('name'),
+            'password' => $request->get('password')
+        ]);
         if (is_null($is_login)) {
             return response()->json([
                 'message' => false,
@@ -83,6 +86,26 @@ class UsersController extends Controller
         Auth::logout();
         return response()->json([
             'message' => true,
+        ]);
+    }
+
+    public function is_auth()
+    {
+        if (Auth::check()) {
+            $user=Auth::user();
+            return response()->json([
+                'user' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'followers' => $user->followers,
+                    'following' => $user->following,
+                    'created_at' => $user->created_at->toDateString(),
+                ],
+                'message' => true,
+            ]);
+        }
+        return response()->json([
+            'message' => false,
         ]);
     }
 }

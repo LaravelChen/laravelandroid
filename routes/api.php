@@ -13,6 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('/user_login', 'UsersController@login');
-Route::post('/user_register','UsersController@register');
-Route::get('/logout','UsersController@logout');
+
