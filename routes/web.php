@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('/user_login', 'UsersController@login');
-Route::post('/user_register','UsersController@register');
-Route::get('/logout','UsersController@logout');
-Route::get('/is_auth','UsersController@is_auth');
+Route::post('/api/user_login', 'UsersController@login');
+Route::post('/api/user_register','UsersController@register');
+Route::get('/api/logout','UsersController@logout');
+Route::get('/api/is_auth','UsersController@is_auth');
