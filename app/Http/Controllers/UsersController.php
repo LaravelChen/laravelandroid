@@ -92,7 +92,7 @@ class UsersController extends Controller
     public function is_auth()
     {
         if (Auth::check()) {
-            $user=Auth::user();
+            $user = Auth::user();
             return response()->json([
                 'user' => [
                     'name' => $user->name,
