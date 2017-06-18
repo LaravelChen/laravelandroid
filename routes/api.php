@@ -13,5 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/get_user_info', 'UsersController@getusers');
-Route::post('/insert_userinfo','UsersController@insertusers');
+Route::post('/user_login', 'UsersController@login');
+Route::post('/user_register','UsersController@register');
+Route::get('/logout','UsersController@logout');
