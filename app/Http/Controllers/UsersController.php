@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class UsersController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         $is_login = Auth::attempt($request->all());
@@ -16,7 +21,7 @@ class UsersController extends Controller
                 'message' => false,
             ]);
         }
-        $user=Auth::user();
+        $user = Auth::user();
         return response()->json([
             'user' => [
                 'name' => $user->name,
@@ -29,8 +34,32 @@ class UsersController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => false,
+                'type' => 'name',
+                'info' => '用户名已存在'
+            ]);
+        }
+        $validator2 = Validator::make($request->all(), [
+            'email' => 'required|unique:users',
+        ]);
+        if ($validator2->fails()) {
+            return response()->json([
+                'message' => false,
+                'type' => 'email',
+                'info' => '邮箱已存在'
+            ]);
+        }
         $user = User::create($request->all());
         if ($user) {
             return response()->json([
@@ -43,13 +72,12 @@ class UsersController extends Controller
                 ],
                 'message' => true,
             ]);
-        } else {
-            return response()->json([
-                'message' => false,
-            ]);
         }
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout()
     {
         Auth::logout();
