@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-
+Route::post('/user_register', 'UsersController@register');
