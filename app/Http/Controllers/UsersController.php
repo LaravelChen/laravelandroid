@@ -28,6 +28,7 @@ class UsersController extends Controller
                     'followers' => $user->followers,
                     'following' => $user->following,
                     'created_at' => $user->created_at->toDateString(),
+                    'api_token' => $user->api_token,
                 ],
                 'message' => true,
             ]);
@@ -65,7 +66,7 @@ class UsersController extends Controller
                 'info' => '邮箱已存在'
             ]);
         }
-        $user = User::create($request->all());
+        $user = User::create(array_merge($request->all(), ["api_token" => str_random(60)]));
         if ($user) {
             return response()->json([
                 'user' => [
@@ -93,7 +94,7 @@ class UsersController extends Controller
 
     public function is_auth()
     {
-        if (Auth::check()) {
+        if (Auth::guard()) {
             $user = Auth::user();
             return response()->json([
                 'user' => [
