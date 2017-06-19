@@ -15,26 +15,28 @@ class UsersController extends Controller
      */
     public function login(Request $request)
     {
-        $is_login = Auth::attempt([
-            'email' => $request->get('name'),
+        if (Auth::attempt([
+            'email' => $request->get('email'),
             'password' => $request->get('password')
-        ]);
-        if (is_null($is_login)) {
+        ])
+        ) {
+            $user = Auth::user();
             return response()->json([
-                'message' => false,
+                'user' => [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'followers' => $user->followers,
+                    'following' => $user->following,
+                    'created_at' => $user->created_at->toDateString(),
+                ],
+                'message' => true,
             ]);
         }
-        $user = Auth::user();
+
         return response()->json([
-            'user' => [
-                'name' => $user->name,
-                'email' => $user->email,
-                'followers' => $user->followers,
-                'following' => $user->following,
-                'created_at' => $user->created_at->toDateString(),
-            ],
-            'message' => true,
+            'message' => false,
         ]);
+
     }
 
     /**

@@ -9,12 +9,12 @@
     </head>
     <body>
     <div class="container" style="margin-top: 100px">
-        <form method="POST" action="{{url('/api/user_register')}}" accept-charset="UTF-8">
-            {!! csrf_field() !!}
-            <div class="form-group">
-                <label for="name" class="control-label">User:</label>
-                <input id="name" name="name" type="text" class="form-control" required="required">
-            </div>
+        <form method="POST" action="{{url('/api/user_login')}}" accept-charset="UTF-8">
+            {{--{!! csrf_field() !!}--}}
+            {{--<div class="form-group">--}}
+                {{--<label for="name" class="control-label">User:</label>--}}
+                {{--<input id="name" name="name" type="text" class="form-control" required="required">--}}
+            {{--</div>--}}
             <div class="form-group">
                 <label for="password" class="control-label">密码:</label>
                 <input id="password" name="password" type="password" class="form-control" required="required">
