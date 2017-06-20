@@ -15,7 +15,7 @@ class AddSomeInfo extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string("avatar")->default("https://photo.laravelchen.cn/avataravatar.jpeg");
-            $table->text("introduction")->nullable();
+            $table->string("introduction")->default("请填写");
             $table->string("sex")->default("请选择");
             $table->string("birthday")->default("请选择");
         });
