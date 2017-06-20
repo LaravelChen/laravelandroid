@@ -23,12 +23,17 @@ class UsersController extends Controller
             $user = Auth::user();
             return response()->json([
                 'user' => [
+                    'id' => $user->id,
                     'name' => $user->name,
                     'email' => $user->email,
                     'followers' => $user->followers,
                     'following' => $user->following,
                     'created_at' => $user->created_at->toDateString(),
                     'api_token' => $user->api_token,
+                    'introduction' => $user->introduction,
+                    'avatar' => $user->avatar,
+                    'sex' => $user->sex,
+                    'birthday' => $user->birthday,
                 ],
                 'message' => true,
             ]);
