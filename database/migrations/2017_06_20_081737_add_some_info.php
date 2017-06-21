@@ -35,4 +35,5 @@ class AddSomeInfo extends Migration
             $table->dropColumn("birthday");
         });
     }
+
 }

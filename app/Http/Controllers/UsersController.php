@@ -116,4 +116,59 @@ class UsersController extends Controller
             'message' => false,
         ]);
     }
+
+    
+    public function set_birthday(Request $request)
+    {
+        $user = User::find($request->get('id'));
+        $user->update([
+            "birthday" => $request->get('birthday'),
+        ]);
+        return response()->json([
+            "message" => true
+        ]);
+    }
+
+    public function set_sex(Request $request)
+    {
+        $user = User::find($request->get('id'));
+        $user->update([
+            "sex" => $request->get('sex'),
+        ]);
+        return response()->json([
+            "message" => true
+        ]);
+    }
+
+    public function set_info(Request $request)
+    {
+        $user = User::find($request->get('id'));
+        $user->update([
+            "introduction" => $request->get('introduction'),
+        ]);
+        return response()->json([
+            "message" => true
+        ]);
+    }
+
+    public function set_name(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:users',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => false,
+                'type' => 'name',
+                'info' => '用户名已存在'
+            ]);
+        }
+        $user = User::find($request->get('id'));
+        $user->update([
+            "name" => $request->get('name'),
+        ]);
+        return response()->json([
+            "message" => true
+        ]);
+    }
 }
