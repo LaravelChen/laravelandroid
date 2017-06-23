@@ -1,3 +1,2 @@
 ## Android今日头条的接口
-
-> 具体的Android项目过段时间会放在github上面.
+### 请移步:https://github.com/LaravelChen/TouTiao 查看具体项目
